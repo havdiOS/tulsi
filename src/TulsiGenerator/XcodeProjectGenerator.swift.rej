@@ -1,0 +1,14 @@
+diff a/src/TulsiGenerator/XcodeProjectGenerator.swift b/src/TulsiGenerator/XcodeProjectGenerator.swift	(rejected hunks)
+@@ -1076,6 +1076,12 @@ final class XcodeProjectGenerator {
+       }
+ 
+       let filename = suiteName + "_Suite.xcscheme"
++      var additionalBuildTargets: [(PBXTarget, String, XcodeScheme.BuildActionEntryAttributes)] = []
++      for test in validTests {
++        for dep in test.schemeBuildDependencies {
++          additionalBuildTargets.append((dep, projectBundleName, XcodeScheme.makeBuildActionEntryAttributes()))
++        }
++      }
+ 
+       let url = xcschemesURL.appendingPathComponent(filename)
+       let scheme = XcodeScheme(target: extractedHostTarget,
