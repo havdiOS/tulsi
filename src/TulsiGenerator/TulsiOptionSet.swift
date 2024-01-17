@@ -46,12 +46,6 @@ public enum TulsiOptionKey: String {
 
       // Environment Variables used by the run phase of the generated scheme.
       EnvironmentVariables,
-      
-      // Code coverage report filter regex.
-      CodeCoverageFilterRegex,
-      
-      // Code coverage report ignore filter regex.
-      CodeCoverageIgnoreFilterRegex,
 
       // Option to enable compilation after error.
       BazelContinueBuildingAfterError,
@@ -86,6 +80,9 @@ public enum TulsiOptionKey: String {
       // i386.
       Use64BitWatchSimulator,
 
+      // Target the legacy build system instead of the new build system.
+      UseLegacyBuildSystem,
+
       // Option to fallback to using a global lldbinit.
       DisableCustomLLDBInit,
 
@@ -94,9 +91,9 @@ public enum TulsiOptionKey: String {
 
       // Custom build phase run script that runs after bazel build.
       PostBuildPhaseRunScript,
-      
-      // Enable code coverage HTML report
-      HTMLCodeCoverage
+
+      // Option to use a fallback approach to finding dSYMs.
+      UseBazelCacheReader
 
   // Options for build invocations.
   case BazelBuildOptionsDebug,
@@ -280,6 +277,13 @@ public class TulsiOptionSet: Equatable {
     return buildSettings
   }
 
+  // MARK: - Public Getters
+
+  /// Whether the legacy build system should be used instead of the new build system.
+  var useLegacyBuildSystem: Bool {
+    return self[.UseLegacyBuildSystem].commonValueAsBool ?? false
+  }
+
   // MARK: - Private methods.
 
   private func saveToDictionary(_ filter: (TulsiOptionKey, TulsiOption) -> Bool) -> PersistenceType {
@@ -346,7 +350,8 @@ public class TulsiOptionSet: Equatable {
     addBoolOption(.TreeArtifactOutputs, .Generic, true)
     addBoolOption(.Use64BitWatchSimulator, .Generic, false)
     addBoolOption(.DisableCustomLLDBInit, .Generic, false)
-    addBoolOption(.HTMLCodeCoverage, .Generic, false)
+    addBoolOption(.UseBazelCacheReader, .Generic, false)
+    addBoolOption(.UseLegacyBuildSystem, .Generic, false)
 
     let defaultIdentifier = PlatformConfiguration.defaultConfiguration.identifier
     let platformCPUIdentifiers = PlatformConfiguration.allValidConfigurations.map { $0.identifier }
@@ -357,9 +362,6 @@ public class TulsiOptionSet: Equatable {
 
     addStringOption(.CommandlineArguments, [.TargetSpecializable, .SupportsInheritKeyword])
     addStringOption(.EnvironmentVariables, [.TargetSpecializable, .SupportsInheritKeyword])
-    
-    addStringOption(.CodeCoverageFilterRegex, [.TargetSpecializable, .SupportsInheritKeyword])
-    addStringOption(.CodeCoverageIgnoreFilterRegex, [.TargetSpecializable, .SupportsInheritKeyword])
 
     // List matches the available options for the 'C++ Language Dialect' setting in XCode 10.2.1 and 11.
     // Currently compiler default is equivalent to GNU++98 (Xcode 10.2.1 and 11)
