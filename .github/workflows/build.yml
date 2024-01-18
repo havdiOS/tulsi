@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 env:
-  xcode_version: "13.4.1"
+  xcode_version: "15.1"
 
 jobs:
   macos_rolling:
