@@ -657,9 +657,6 @@ final class PBXShellScriptBuildPhase: PBXBuildPhase {
     try serializer.addField("shellPath", shellPath)
     try serializer.addField("shellScript", shellScript)
     try serializer.addField("showEnvVarsInLog", showEnvVarsInLog)
-    if alwaysOutOfDate {
-      try serializer.addField("alwaysOutOfDate", 1)
-    }
   }
 }
 
