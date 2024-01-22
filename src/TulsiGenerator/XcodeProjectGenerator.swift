@@ -1145,7 +1145,6 @@ final class XcodeProjectGenerator {
                                customLLDBInitFile: customLLDBInitFile,
                                launchStyle: .Normal,
                                explicitTests: Array(validTests),
-                               additionalBuildTargets: additionalBuildTargets,
                                commandlineArguments: commandlineArguments(for: suite),
                                environmentVariables: environmentVariables(for: suite),
                                preActionScripts: preActionScripts(for: suite),
