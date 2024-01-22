@@ -1,6 +1,6 @@
 load("@build_bazel_rules_apple//apple:resources.bzl", "apple_resource_group")
 
-licenses(["notice"])  # Apache 2.0
+licenses(["notice"])
 
 package(default_visibility = ["//:__subpackages__"])
 
@@ -22,5 +22,6 @@ apple_resource_group(
     structured_resources = [
         "tulsi/tulsi_aspects.bzl",
         "tulsi/tulsi_aspects_paths.bzl",
+        "tulsi/tulsi_aspects_propagation_attrs.bzl",
     ],
 )

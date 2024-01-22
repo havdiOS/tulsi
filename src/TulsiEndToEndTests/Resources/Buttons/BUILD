@@ -1,7 +1,6 @@
 load(
     "@build_bazel_rules_apple//apple:ios.bzl",
     "ios_application",
-    "ios_static_framework",
     "ios_ui_test",
     "ios_unit_test",
 )
@@ -23,7 +22,7 @@ load(
     "watchos_extension",
 )
 load(
-    "@build_bazel_rules_swift//swift:swift.bzl",
+    "@build_bazel_rules_swift//swift:swift_library.bzl",
     "swift_library",
 )
 
@@ -108,13 +107,6 @@ ios_application(
     ],
 )
 
-ios_static_framework(
-    name = "ButtonsStaticFramework",
-    bundle_name = "ButtonsStaticFramework",
-    minimum_os_version = "8.0",
-    deps = [":ButtonsLib"],
-)
-
 ## Tests
 
 ios_unit_test(
@@ -161,13 +153,6 @@ swift_library(
     module_name = "ButtonsWatchExtension",
 )
 
-## Resources
-
-objc_library(
-    name = "ButtonsWatchResources",
-    data = ["ButtonsWatch/Base.lproj/Interface.storyboard"],
-)
-
 ## Packaging
 
 watchos_application(
@@ -176,9 +161,7 @@ watchos_application(
     extension = ":ButtonsWatchExtension",
     infoplists = ["ButtonsWatch/Info.plist"],
     minimum_os_version = "3.0",
-    deps = [
-        ":ButtonsWatchResources",
-    ],
+    storyboards = ["ButtonsWatch/Base.lproj/Interface.storyboard"],
 )
 
 watchos_extension(

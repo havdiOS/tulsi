@@ -29,8 +29,8 @@ load(
     "@build_bazel_rules_apple//apple:ios.bzl",
     "ios_application",
     "ios_extension",
-    "ios_unit_test",
     "ios_ui_test",
+    "ios_unit_test",
 )
 load(
     "@build_bazel_rules_apple//apple:resources.bzl",
@@ -230,6 +230,7 @@ ios_unit_test(
 apple_static_framework_import(
     name = "ObjCFramework",
     framework_imports = [
+        "ObjCFramework/test.framework/test",
         "ObjCFramework/test.framework/file1",
         "ObjCFramework/test.framework/file2.txt",
         "ObjCFramework/test.framework/file3.m",

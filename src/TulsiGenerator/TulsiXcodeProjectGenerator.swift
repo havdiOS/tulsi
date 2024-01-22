@@ -48,10 +48,8 @@ public final class TulsiXcodeProjectGenerator {
 
     let resourceURLs = XcodeProjectGenerator.ResourceSourcePathURLs(
         buildScript: bundle.url(forResource: "bazel_build", withExtension: "py")!,
+        resignerScript: bundle.url(forResource: "resigner", withExtension: "py")!,
         cleanScript: bundle.url(forResource: "bazel_clean", withExtension: "sh")!,
-        swiftlintScript: bundle.url(forResource: "swiftlint", withExtension: "sh")!,
-        pMD_CPDScript: bundle.url(forResource: "cpd", withExtension: "sh")!,
-        codeCoverageReportScript: bundle.url(forResource: "code_coverage_report", withExtension: "sh")!,
         extraBuildScripts: [bundle.url(forResource: "tulsi_logging", withExtension: "py")!,
                             bundle.url(forResource: "bazel_options", withExtension: "py")!,
                             bundle.url(forResource: "apfs_clone_copy", withExtension: "py")!,
@@ -67,6 +65,9 @@ public final class TulsiXcodeProjectGenerator {
         stubIOSAppExInfoPlistTemplate: bundle.url(forResource: "StubIOSAppExtensionInfoPlist", withExtension: "plist")!,
         stubWatchOS2InfoPlist: bundle.url(forResource: "StubWatchOS2InfoPlist", withExtension: "plist")!,
         stubWatchOS2AppExInfoPlist: bundle.url(forResource: "StubWatchOS2AppExtensionInfoPlist", withExtension: "plist")!,
+        stubClang: bundle.url(forResource: "clang_stub", withExtension: "sh")!,
+        stubSwiftc: bundle.url(forResource: "swiftc_stub", withExtension: "py")!,
+        stubLd: bundle.url(forResource: "ld_stub", withExtension: "sh")!,
         bazelWorkspaceFile: bundle.url(forResource: "WORKSPACE", withExtension: nil)!,
         tulsiPackageFiles: bundle.urls(forResourcesWithExtension: nil, subdirectory: "tulsi")!)
 

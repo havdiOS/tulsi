@@ -75,9 +75,6 @@ public class BazelBuildSettingsFeatures {
     if options[.TreeArtifactOutputs].commonValueAsBool ?? true {
       features.insert(.TreeArtifactOutputs)
     }
-    if options[.HTMLCodeCoverage].commonValueAsBool ?? false {
-      features.insert(.HTMLCodeCoverage)
-    }
     return features
   }
 }

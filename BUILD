@@ -12,7 +12,7 @@ load("@build_bazel_rules_apple//apple:macos.bzl", "macos_application")
 
 package(default_visibility = ["//:__subpackages__"])
 
-licenses(["notice"])  # Apache 2.0
+licenses(["notice"])
 
 exports_files(["LICENSE"])
 
@@ -62,12 +62,13 @@ macos_application(
     name = "tulsi",
     additional_contents = {
         "//src/tools/bazel_cache_reader": "MacOS",
+        "//src/tools/module_cache_pruner": "MacOS",
     },
     app_icons = ["//src/Tulsi:Icon"],
     bundle_id = "com.google.Tulsi",
     bundle_name = "Tulsi",
     infoplists = [":Info.plist"],
-    minimum_os_version = "10.13",
+    minimum_os_version = "11.0",
     strings = [":strings"],
     version = ":AppVersion",
     visibility = ["//visibility:public"],
