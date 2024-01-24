@@ -1,7 +1,6 @@
 load(
     "@build_bazel_rules_apple//apple:ios.bzl",
     "ios_application",
-    "ios_static_framework",
     "ios_ui_test",
     "ios_unit_test",
 )
@@ -98,7 +97,7 @@ ios_application(
         "ipad",
     ],
     infoplists = ["Buttons/Info.plist"],
-    minimum_os_version = "8.0",
+    minimum_os_version = "11.0",
     watch_application = ":ButtonsWatch",
     deps = [
         ":ButtonsLib",
@@ -108,31 +107,24 @@ ios_application(
     ],
 )
 
-ios_static_framework(
-    name = "ButtonsStaticFramework",
-    bundle_name = "ButtonsStaticFramework",
-    minimum_os_version = "8.0",
-    deps = [":ButtonsLib"],
-)
-
 ## Tests
 
 ios_unit_test(
     name = "ButtonsTests",
-    minimum_os_version = "10.0",
+    minimum_os_version = "11.0",
     test_host = ":Buttons",
     deps = [":ButtonsTestsLib"],
 )
 
 ios_unit_test(
     name = "ButtonsLogicTests",
-    minimum_os_version = "10.0",
+    minimum_os_version = "11.0",
     deps = [":ButtonsTestsLib"],
 )
 
 ios_ui_test(
     name = "ButtonsUITests",
-    minimum_os_version = "10.0",
+    minimum_os_version = "11.0",
     test_host = ":Buttons",
     deps = [":ButtonsUITestsLib"],
 )
@@ -161,13 +153,6 @@ swift_library(
     module_name = "ButtonsWatchExtension",
 )
 
-## Resources
-
-objc_library(
-    name = "ButtonsWatchResources",
-    data = ["ButtonsWatch/Base.lproj/Interface.storyboard"],
-)
-
 ## Packaging
 
 watchos_application(
@@ -175,17 +160,15 @@ watchos_application(
     bundle_id = "com.google.Buttons.watchkitapp",
     extension = ":ButtonsWatchExtension",
     infoplists = ["ButtonsWatch/Info.plist"],
-    minimum_os_version = "3.0",
-    deps = [
-        ":ButtonsWatchResources",
-    ],
+    minimum_os_version = "4.0",
+    storyboards = ["ButtonsWatch/Base.lproj/Interface.storyboard"],
 )
 
 watchos_extension(
     name = "ButtonsWatchExtension",
     bundle_id = "com.google.Buttons.watchkitapp.watchkitextension",
     infoplists = ["ButtonsWatchExtension/Info.plist"],
-    minimum_os_version = "3.0",
+    minimum_os_version = "4.0",
     deps = [
         ":ButtonsWatchExtensionLib",
         ":CppLib",
@@ -242,7 +225,7 @@ tvos_application(
     bundle_id = "com.google.ButtonsTV",
     extensions = [":ButtonsTVExtension"],
     infoplists = ["ButtonsTV/Info.plist"],
-    minimum_os_version = "10.2",
+    minimum_os_version = "11.0",
     deps = [
         ":ButtonsTVLib",
         ":ButtonsTVResources",
@@ -255,7 +238,7 @@ tvos_extension(
     name = "ButtonsTVExtension",
     bundle_id = "com.google.ButtonsTV.ButtonsTVExtension",
     infoplists = ["ButtonsTVExtension/Info.plist"],
-    minimum_os_version = "10.2",
+    minimum_os_version = "11.0",
     deps = [":ButtonsTVExtensionLib"],
 )
 
@@ -302,7 +285,7 @@ macos_application(
     name = "ButtonsMac",
     bundle_id = "com.google.ButtonsMac",
     infoplists = ["ButtonsMac/Info.plist"],
-    minimum_os_version = "10.10",
+    minimum_os_version = "10.13",
     deps = [
         ":ButtonsMacLib",
         ":ButtonsMacResources",
@@ -316,13 +299,13 @@ macos_application(
 macos_unit_test(
     name = "ButtonsMacLogicTests",
     bundle_id = "com.google.logic",
-    minimum_os_version = "10.10",
+    minimum_os_version = "10.13",
     deps = [":ButtonsMacTestsLib"],
 )
 
 macos_unit_test(
     name = "ButtonsMacTests",
-    minimum_os_version = "10.10",
+    minimum_os_version = "10.13",
     test_host = ":ButtonsMac",
     deps = [":ButtonsMacTestsLib"],
 )
@@ -330,7 +313,7 @@ macos_unit_test(
 # Enable when macos_test_runner supports macOS UI Tests.
 # macos_ui_test(
 #     name = "ButtonsMacUITests",
-#     minimum_os_version = "10.11",
+#     minimum_os_version = "10.13",
 #     test_host = ":ButtonsMac",
 #     deps = [":ButtonsMacUITestsLib"],
 # )
